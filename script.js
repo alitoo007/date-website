@@ -1,5 +1,6 @@
 const no = document.getElementById("no");
 const yes = document.getElementById("yes");
+const msg = document.getElementById("message");
 
 const noTexts = [
     "No 💔",
@@ -17,14 +18,6 @@ const noTexts = [
 let attempt = 0;
 let yesScale = 1;
 
-let selectedDate = "";
-let selectedTime = "";
-let selectedFood = "";
-
-/* ------------------------------
-   Move No Button
------------------------------- */
-
 function moveNoButton() {
 
     const maxX = window.innerWidth - no.offsetWidth - 20;
@@ -33,197 +26,213 @@ function moveNoButton() {
     no.style.position = "fixed";
     no.style.left = Math.random() * maxX + "px";
     no.style.top = Math.random() * maxY + "px";
-
 }
 
-no.addEventListener("mousedown", function (e) {
+no.addEventListener("mousedown", function(e){
 
     e.preventDefault();
 
-    if (attempt < noTexts.length - 1) {
+    if(attempt < noTexts.length - 1){
         attempt++;
         no.textContent = noTexts[attempt];
     }
 
     yesScale += 0.25;
+
     yes.style.transform = `scale(${yesScale})`;
 
     moveNoButton();
 
 });
 
-/* ------------------------------
-   YES BUTTON
------------------------------- */
-
 yes.addEventListener("click", () => {
 
-    document.body.innerHTML = `
+document.body.innerHTML = `
 
-    <div class="page">
+<div class="page">
 
-        <div class="card">
+<div class="card">
 
-            <div class="cupid">👼💘</div>
+<div class="cupid">👼💘</div>
 
-            <h1>So... when are you free?</h1>
+<h1>So... when are you free?</h1>
 
-            <label>Pick a Day ✨</label>
-            <input type="date" id="date">
+<label>Pick a Day ✨</label>
+<input type="date" id="date">
 
-            <label>What Time? 🕒</label>
-            <input type="time" id="time">
+<label>What Time? 🤭</label>
+<input type="time" id="time">
 
-            <button id="next">
-                Next →
-            </button>
+<button id="next">okay next →</button>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    `;
+`;
 
 });
 
-/* ------------------------------
-   DATE PAGE
------------------------------- */
+function createHearts(){
 
-document.addEventListener("click", function (e) {
-
-    if (e.target.id !== "next") return;
-
-    selectedDate = document.getElementById("date").value;
-    selectedTime = document.getElementById("time").value;
-
-    if (!selectedDate || !selectedTime) {
-
-        alert("Please choose a date and time ❤️");
-        return;
-
-    }
-
-    document.body.innerHTML = `
-
-    <div class="page">
-
-        <div class="card">
-
-            <div class="food-icon">🍽️</div>
-
-            <h1>What would you like to eat?</h1>
-
-            <select id="food">
-
-                <option value="">Choose...</option>
-
-                <option>🍕 Pizza</option>
-                <option>🍔 Burger</option>
-                <option>🍣 Sushi</option>
-                <option>🍝 Italian</option>
-                <option>🥩 Steak</option>
-                <option>🌮 Mexican</option>
-                <option>🍜 Noodles</option>
-                <option>🍗 Chicken</option>
-                <option>🥗 Healthy</option>
-                <option>🍰 Dessert</option>
-                <option>🎬 Netflix & Chill</option>
-
-            </select>
-
-            <button id="foodNext">
-                Continue →
-            </button>
-
-        </div>
-
-    </div>
-
-    `;
-
-});
-
-/* ------------------------------
-   FOOD PAGE
------------------------------- */
-
-document.addEventListener("click", function (e) {
-
-    if (e.target.id !== "foodNext") return;
-
-    selectedFood = document.getElementById("food").value;
-
-    if (!selectedFood) {
-
-        alert("Please choose a food ❤️");
-        return;
-
-    }
-
-    document.body.innerHTML = `
-
-    <div class="page">
-
-        <div class="success">
-
-            <h1>🎉 It's a Date! ❤️</h1>
-
-            <p><strong>📅 Date:</strong> ${selectedDate}</p>
-
-            <p><strong>🕒 Time:</strong> ${selectedTime}</p>
-
-            <p><strong>🍽️ Food:</strong> ${selectedFood}</p>
-
-            <p>I can't wait to see you 🥰</p>
-
-            <button class="finishBtn" onclick="location.reload()">
-                Start Again ❤️
-            </button>
-
-        </div>
-
-    </div>
-
-    `;
-
-    createHearts();
-
-});
-
-/* ------------------------------
-   HEART ANIMATION
------------------------------- */
-
-function createHearts() {
-
-    const interval = setInterval(() => {
+    setInterval(()=>{
 
         const heart = document.createElement("div");
 
-        heart.innerHTML = "❤️";
+        heart.innerHTML="❤️";
 
-        heart.style.position = "fixed";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.top = "100vh";
-        heart.style.fontSize = (20 + Math.random() * 25) + "px";
-        heart.style.pointerEvents = "none";
-        heart.style.animation = "float 4s linear forwards";
+        heart.style.position="fixed";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.top="100vh";
+        heart.style.fontSize=(20+Math.random()*25)+"px";
+        heart.style.animation="float 4s linear forwards";
 
         document.body.appendChild(heart);
 
-        setTimeout(() => {
+        setTimeout(()=>heart.remove(),4000);
 
-            heart.remove();
-
-        }, 4000);
-
-    }, 200);
-
-    setTimeout(() => {
-
-        clearInterval(interval);
-
-    }, 5000);
+    },200);
 
 }
+
+const style=document.createElement("style");
+
+style.innerHTML=`
+.success{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+background:#ffe5ec;
+font-family:Arial;
+}
+
+.success h1{
+font-size:60px;
+color:#ff2d55;
+}
+
+.success h2{
+margin-top:15px;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(720deg);
+opacity:0;
+}
+}
+`;
+
+document.head.appendChild(style);
+document.addEventListener("click", function(e){
+
+if(e.target.id==="next"){
+
+document.body.innerHTML=`
+
+<div class="page">
+
+<div class="card">
+
+<h1>It's a date! ❤️</h1>
+
+<p>I can't wait to see you 🥹</p>
+
+<button onclick="location.reload()">
+Start Again
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+});
+document.addEventListener("click", function(e) {
+
+    if (e.target.id === "next") {
+
+        document.body.innerHTML = `
+
+        <div class="page">
+
+            <div class="card">
+
+                <div class="food-icon">🍽️💖</div>
+
+                <h1>What type of food are you craving?</h1>
+
+                <select id="food">
+
+                    <option value="">Choose one...</option>
+                    <option>🍕 Pizza</option>
+                    <option>🍔 Burgers</option>
+                    <option>🍣 Sushi</option>
+                    <option>🍝 Italian</option>
+                    <option>🥩 Steak</option>
+                    <option>🌮 Mexican</option>
+                    <option>🍗 Chicken</option>
+                    <option>🥗 Healthy</option>
+                    <option>🍜 Noodles</option>
+                    <option>🍛 Indian</option>
+                    <option>🍰 Dessert</option>
+                    <option>🤷 Surprise Me!</option>
+                    <option>🎬 Netflix and Chill ! </option>
+                    <option>🔞 sex! </option>
+
+                </select>
+
+                <button id="foodNext">
+                    Continue →
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+    }
+});
+document.addEventListener("click", function(e){
+
+    if(e.target.id === "foodNext"){
+
+        const food = document.getElementById("food").value;
+
+        if(food === ""){
+            alert("Please choose your favourite food! ❤️");
+            return;
+        }
+
+        document.body.innerHTML = `
+
+        <div class="page">
+
+            <div class="card">
+
+                <h1>Yay! 🎉</h1>
+
+                <p>We'll have <strong>${food}</strong> together! 😍</p>
+
+                <button onclick="location.reload()">
+                    Finish ❤️
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+    }
+
+});
