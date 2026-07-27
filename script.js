@@ -1,8 +1,4 @@
-import { db } from "./firebase.js";
-import {
-    ref,
-    push
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
 
 const no = document.getElementById("no");
 const yes = document.getElementById("yes");
@@ -53,26 +49,39 @@ no.addEventListener("mousedown", function (e) {
 
 });
 
-yes.addEventListener("click", () => {
+
+document.addEventListener("click", function(e){
+
+    if(e.target.id !== "foodNext") return;
+
+    selectedFood = document.getElementById("food").value;
+
+    if(selectedFood === ""){
+
+        alert("Please choose your favourite food ❤️");
+
+        return;
+
+    }
 
     document.body.innerHTML = `
 
     <div class="page">
 
-        <div class="card">
+        <div class="success">
 
-            <div class="cupid">👼💘</div>
+            <h1>🎉 It's a Date! ❤️</h1>
 
-            <h1>So... when are you free?</h1>
+            <p><strong>📅 Date:</strong> ${selectedDate}</p>
 
-            <label>Pick a Day ✨</label>
-            <input type="date" id="date">
+            <p><strong>🕒 Time:</strong> ${selectedTime}</p>
 
-            <label>What Time? 🤭</label>
-            <input type="time" id="time">
+            <p><strong>🍽️ Food:</strong> ${selectedFood}</p>
 
-            <button id="next">
-                Okay Next →
+            <p>Can't wait to see you! 🥰</p>
+
+            <button class="finishBtn" onclick="location.reload()">
+                Start Again ❤️
             </button>
 
         </div>
@@ -80,6 +89,8 @@ yes.addEventListener("click", () => {
     </div>
 
     `;
+
+    createHearts();
 
 });
 
@@ -137,18 +148,7 @@ document.addEventListener("click", function (e) {
 
 });
 
-async function saveResponse() {
 
-    await push(ref(db, "responses"), {
-
-        date: selectedDate,
-        time: selectedTime,
-        food: selectedFood,
-        submittedAt: new Date().toISOString()
-
-    });
-
-}
 document.addEventListener("click", async function (e) {
 
     if (e.target.id !== "foodNext") return;
