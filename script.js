@@ -1,3 +1,9 @@
+import { db } from "./firebase.js";
+
+import {
+    ref,
+    push
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 const no = document.getElementById("no");
 const yes = document.getElementById("yes");
 const msg = document.getElementById("message");
