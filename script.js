@@ -120,7 +120,6 @@ document.addEventListener("click", function (e) {
                 <option>🍜 Noodles</option>
                 <option>🍰 Dessert</option>
                 <option>🎬 Netflix & Chill</option>
-                 <option> Netflix & Chill</option>
                 <option>🔞 sex! </option>
             </select>
 
