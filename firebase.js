@@ -26,3 +26,26 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+async function saveResponse(date, time, food) {
+
+    try {
+
+        await push(ref(db, "responses"), {
+            date: date,
+            time: time,
+            food: food,
+            submittedAt: new Date().toISOString()
+        });
+
+        alert("Your response has been saved ❤️");
+
+    } catch (error) {
+        console.error(error);
+        alert("Something went wrong.");
+    }
+}
+const date = document.getElementById("date").value;
+const time = document.getElementById("time").value;
+const food = document.getElementById("food").value;
+
+saveResponse(date, time, food);
