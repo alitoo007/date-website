@@ -158,9 +158,9 @@ Start Again
 }
 
 });
-document.addEventListener("click", function(e) {
+document.addEventListener("click", function (e) {
 
-    if (e.target.id === "next") {
+    if (e.target.id === "confirmDate") {
 
         document.body.innerHTML = `
 
@@ -168,28 +168,23 @@ document.addEventListener("click", function(e) {
 
             <div class="card">
 
-                <div class="food-icon">🍽️💖</div>
+                <div class="food-icon">🍽️</div>
 
-                <h1>What type of food are you craving?</h1>
+                <h1>What would you like to eat?</h1>
 
                 <select id="food">
 
                     <option value="">Choose one...</option>
                     <option>🍕 Pizza</option>
-                    <option>🍔 Burgers</option>
+                    <option>🍔 Burger</option>
                     <option>🍣 Sushi</option>
                     <option>🍝 Italian</option>
-                    <option>🥩 Steak</option>
                     <option>🌮 Mexican</option>
+                    <option>🥩 Steak</option>
                     <option>🍗 Chicken</option>
-                    <option>🥗 Healthy</option>
-                    <option>🍜 Noodles</option>
-                    <option>🍛 Indian</option>
                     <option>🍰 Dessert</option>
-                    <option>🤷 Surprise Me!</option>
-                    <option>🎬 Netflix and Chill ! </option>
-                    <option>🔞 sex! </option>
-
+                    <option>🎬 Netflix & Chill</option>
+                       <option>🔞 sex! </option>
                 </select>
 
                 <button id="foodNext">
@@ -201,38 +196,70 @@ document.addEventListener("click", function(e) {
         </div>
 
         `;
+
     }
+
+    if (e.target.id === "changeDate") {
+
+        location.reload();
+
+    }
+
 });
-document.addEventListener("click", function(e){
 
-    if(e.target.id === "foodNext"){
+                 
 
-        const food = document.getElementById("food").value;
+  
 
-        if(food === ""){
-            alert("Please choose your favourite food! ❤️");
-            return;
-        }
+document.addEventListener("click", function (e) {
 
-        document.body.innerHTML = `
+    if (e.target.id !== "next") return;
 
-        <div class="page">
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
 
-            <div class="card">
+    if (!date || !time) {
+        alert("Please choose a date and time ❤️");
+        return;
+    }
 
-                <h1>Yay! 🎉</h1>
+    const formattedDate = new Date(date).toLocaleDateString("en-GB", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
 
-                <p>We'll have <strong>${food}</strong> together! 😍</p>
+    document.body.innerHTML = `
 
-                <button onclick="location.reload()">
-                    Finish ❤️
+    <div class="page">
+
+        <div class="card">
+
+            <div class="cupid">💖</div>
+
+            <h1>Is this okay?</h1>
+
+            <p><strong>📅 Date:</strong> ${formattedDate}</p>
+
+            <p><strong>🕒 Time:</strong> ${time}</p>
+
+            <div class="buttons">
+
+                <button id="confirmDate">
+                    Yes, Continue ❤️
+                </button>
+
+                <button id="changeDate">
+                    Change ✏️
                 </button>
 
             </div>
 
         </div>
 
-        `;
-    }
+    </div>
+
+    `;
 
 });
