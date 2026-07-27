@@ -6,20 +6,19 @@ import {
 
 const firebaseConfig = {
 
-    apiKey: "YOUR_API_KEY",
+    apiKey: "AIzaSyA1ChUuQ37VrAGPtbKhGSAUWd5j8smltWU",
 
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    authDomain: "date-website-3972c.firebaseapp.com",
 
-    databaseURL:
-    "https://YOUR_PROJECT-default-rtdb.europe-west1.firebasedatabase.app",
+    databaseURL: "https://date-website-3972c-default-rtdb.europe-west1.firebasedatabase.app",
 
-    projectId: "YOUR_PROJECT",
+    projectId: "date-website-3972c",
 
-    storageBucket: "YOUR_PROJECT.firebasestorage.app",
+    storageBucket: "date-website-3972c.firebasestorage.app",
 
-    messagingSenderId: "YOUR_SENDER_ID",
+    messagingSenderId: "962194139737",
 
-    appId: "YOUR_APP_ID"
+    appId: "1:962194139737:web:aaa2fe6b269ed33e799f48"
 
 };
 
