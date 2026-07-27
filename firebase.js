@@ -1,3 +1,10 @@
+
+import { db } from "./firebase.js";
+
+import {
+    ref,
+    push
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
