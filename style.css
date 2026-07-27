@@ -1,20 +1,90 @@
+/* ===========================
+   RESET
+=========================== */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body{
-    background:linear-gradient(135deg,#ffe4ec,#fff5f8);
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    background:linear-gradient(135deg,#ffe4ec,#fff7fa);
     overflow:hidden;
 }
 
-.container,
+/* ===========================
+   FIRST PAGE
+=========================== */
+
+.container{
+    width:430px;
+    max-width:90%;
+    background:#fff;
+    padding:40px;
+    border-radius:30px;
+    text-align:center;
+    box-shadow:0 20px 50px rgba(0,0,0,.12);
+    animation:fade .5s ease;
+}
+
+.emoji{
+    font-size:90px;
+    margin-bottom:20px;
+    animation:bounce 2s infinite;
+}
+
+.container h1{
+    color:#ff4f7d;
+    font-size:34px;
+    margin-bottom:40px;
+    line-height:1.4;
+}
+
+.buttons{
+    position:relative;
+    width:100%;
+    height:120px;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+    transition:.3s;
+    border-radius:50px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+#yes{
+    position:absolute;
+    left:40px;
+    padding:15px 35px;
+    background:#ff4f7d;
+    color:white;
+}
+
+#yes:hover{
+    transform:scale(1.08);
+}
+
+#no{
+    position:absolute;
+    right:40px;
+    padding:15px 35px;
+    background:#ececec;
+    color:#444;
+}
+
+/* ===========================
+   PAGE CONTAINER
+=========================== */
+
 .page{
     width:100%;
     display:flex;
@@ -22,124 +92,112 @@ body{
     align-items:center;
 }
 
+/* ===========================
+   CARD
+=========================== */
+
 .card{
-    width:380px;
+    width:420px;
+    max-width:92%;
     background:white;
-    border-radius:30px;
     padding:35px;
-    text-align:center;
-    box-shadow:0 15px 40px rgba(0,0,0,.12);
-    animation:fade .5s ease;
+    border-radius:30px;
+    box-shadow:0 20px 50px rgba(0,0,0,.12);
+    animation:fade .4s ease;
 }
 
-.emoji,
+.card h1{
+    text-align:center;
+    color:#ff4f7d;
+    margin-bottom:30px;
+}
+
 .cupid,
 .food-icon{
     font-size:75px;
+    text-align:center;
     margin-bottom:20px;
 }
 
-h1{
-    color:#ff4f7d;
-    margin-bottom:25px;
-}
-
-.buttons{
-    position:relative;
-    height:140px;
-}
-
-button{
-    border:none;
-    cursor:pointer;
-    transition:.25s;
-}
-
-#yes,
-#no,
-#next,
-#foodNext,
-.finishBtn{
-
-    padding:16px 30px;
-    border-radius:50px;
-    font-size:18px;
-}
-
-#yes{
-    background:#ff4f7d;
-    color:white;
-}
-
-#no{
-    background:#ececec;
-    position:absolute;
-    left:190px;
-}
-
-#yes:hover,
-#next:hover,
-#foodNext:hover,
-.finishBtn:hover{
-    transform:scale(1.05);
-}
+/* ===========================
+   INPUTS
+=========================== */
 
 label{
     display:block;
-    text-align:left;
-    margin-top:20px;
+    margin-top:18px;
     margin-bottom:8px;
-    font-weight:bold;
+    font-weight:600;
+    color:#444;
 }
 
 input,
 select{
-
     width:100%;
     padding:15px;
     border-radius:15px;
-    border:1px solid #ddd;
+    border:2px solid #eee;
     font-size:16px;
+    background:white;
 }
 
 input:focus,
 select:focus{
-
     outline:none;
     border-color:#ff4f7d;
 }
 
+/* ===========================
+   NEXT BUTTONS
+=========================== */
+
 #next,
 #foodNext,
 .finishBtn{
-
     width:100%;
     margin-top:30px;
+    padding:16px;
     background:#ff4f7d;
     color:white;
+    font-size:18px;
 }
 
-.success{
+#next:hover,
+#foodNext:hover,
+.finishBtn:hover{
+    background:#ff3366;
+    transform:scale(1.03);
+}
 
-    width:420px;
+/* ===========================
+   SUCCESS PAGE
+=========================== */
+
+.success{
+    width:450px;
+    max-width:90%;
     background:white;
     padding:40px;
     border-radius:30px;
     text-align:center;
-    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    box-shadow:0 20px 50px rgba(0,0,0,.12);
+    animation:fade .5s ease;
 }
 
 .success h1{
-
-    font-size:45px;
     color:#ff4f7d;
+    font-size:42px;
+    margin-bottom:20px;
 }
 
 .success p{
-
-    margin:15px 0;
     font-size:20px;
+    margin:12px 0;
 }
+
+/* ===========================
+   HEART ANIMATION
+=========================== */
 
 @keyframes float{
 
@@ -151,6 +209,22 @@ opacity:1;
 100%{
 transform:translateY(-120vh) rotate(720deg);
 opacity:0;
+}
+
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+
+@keyframes bounce{
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-12px);
 }
 
 }
@@ -169,17 +243,23 @@ transform:translateY(0);
 
 }
 
+/* ===========================
+   MOBILE
+=========================== */
+
 @media(max-width:500px){
 
+.container,
 .card,
 .success{
 
-width:90%;
-padding:25px;
+width:92%;
+padding:28px;
 
 }
 
-h1{
+.container h1,
+.card h1{
 
 font-size:28px;
 
@@ -188,6 +268,18 @@ font-size:28px;
 button{
 
 font-size:16px;
+
+}
+
+#yes{
+
+left:10px;
+
+}
+
+#no{
+
+right:10px;
 
 }
 
