@@ -1,6 +1,5 @@
 const no = document.getElementById("no");
 const yes = document.getElementById("yes");
-const msg = document.getElementById("message");
 
 const noTexts = [
     "No 💔",
@@ -17,6 +16,9 @@ const noTexts = [
 
 let attempt = 0;
 let yesScale = 1;
+
+let selectedDate = "";
+let selectedTime = "";
 
 function moveNoButton() {
 
@@ -63,7 +65,7 @@ document.body.innerHTML = `
 <label>What Time? 🤭</label>
 <input type="time" id="time">
 
-<button id="next">okay next →</button>
+<button id="next">Okay Next →</button>
 
 </div>
 
@@ -73,80 +75,114 @@ document.body.innerHTML = `
 
 });
 
-function createHearts(){
-
-    setInterval(()=>{
-
-        const heart = document.createElement("div");
-
-        heart.innerHTML="❤️";
-
-        heart.style.position="fixed";
-        heart.style.left=Math.random()*100+"vw";
-        heart.style.top="100vh";
-        heart.style.fontSize=(20+Math.random()*25)+"px";
-        heart.style.animation="float 4s linear forwards";
-
-        document.body.appendChild(heart);
-
-        setTimeout(()=>heart.remove(),4000);
-
-    },200);
-
-}
-
-const style=document.createElement("style");
-
-style.innerHTML=`
-.success{
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-height:100vh;
-text-align:center;
-background:#ffe5ec;
-font-family:Arial;
-}
-
-.success h1{
-font-size:60px;
-color:#ff2d55;
-}
-
-.success h2{
-margin-top:15px;
-}
-
-@keyframes float{
-0%{
-transform:translateY(0) rotate(0deg);
-opacity:1;
-}
-100%{
-transform:translateY(-120vh) rotate(720deg);
-opacity:0;
-}
-}
-`;
-
-document.head.appendChild(style);
 document.addEventListener("click", function(e){
 
-if(e.target.id==="next"){
+if(e.target.id !== "next") return;
 
-document.body.innerHTML=`
+selectedDate = document.getElementById("date").value;
+selectedTime = document.getElementById("time").value;
+
+if(selectedDate === "" || selectedTime === ""){
+
+    alert("Please choose a date and time ❤️");
+
+    return;
+
+}
+
+const formattedDate = new Date(selectedDate).toLocaleDateString("en-GB",{
+
+weekday:"long",
+day:"numeric",
+month:"long",
+year:"numeric"
+
+});
+
+document.body.innerHTML = `
 
 <div class="page">
 
 <div class="card">
 
-<h1>It's a date! ❤️</h1>
+<div class="cupid">💕</div>
 
-<p>I can't wait to see you 🥹</p>
+<h1>Confirm your date</h1>
 
-<button onclick="location.reload()">
-Start Again
+<p><strong>📅 ${formattedDate}</strong></p>
+
+<p><strong>🕒 ${selectedTime}</strong></p>
+
+<div class="buttons">
+
+<button id="confirmDate">
+Looks Good ❤️
+</button>
+
+<button id="changeDate">
+Change ✏️
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.addEventListener("click", function(e){
+
+if(e.target.id === "changeDate"){
+
+location.reload();
+
+}
+
+});
+
+document.addEventListener("click", function(e){
+
+if(e.target.id !== "confirmDate") return;
+
+document.body.innerHTML = `
+
+<div class="page">
+
+<div class="card">
+
+<div class="food-icon">🍽️💖</div>
+
+<h1>What type of food are you craving?</h1>
+
+<select id="food">
+
+<option value="">Choose one...</option>
+
+<option>🍕 Pizza</option>
+<option>🍔 Burgers</option>
+<option>🍣 Sushi</option>
+<option>🍝 Italian</option>
+<option>🥩 Steak</option>
+<option>🌮 Mexican</option>
+<option>🍗 Chicken</option>
+<option>🥗 Healthy</option>
+<option>🍜 Noodles</option>
+<option>🍛 Indian</option>
+<option>🍰 Dessert</option>
+<option>🤷 Surprise Me!</option>
+<option>🎬 Netflix and Chill</option>
+<option>🍿 Cinema</option>
+<option>☕ Coffee Date</option>
+
+</select>
+
+<button id="foodNext">
+
+Continue →
+
 </button>
 
 </div>
@@ -155,106 +191,43 @@ Start Again
 
 `;
 
-}
-
 });
-document.addEventListener("click", function (e) {
+/* ==========================
+   FOOD PAGE
+========================== */
 
-    if (e.target.id === "confirmDate") {
+document.addEventListener("click", function(e){
 
-        document.body.innerHTML = `
+    if(e.target.id !== "foodNext") return;
 
-        <div class="page">
+    const food = document.getElementById("food").value;
 
-            <div class="card">
+    if(food === ""){
 
-                <div class="food-icon">🍽️</div>
-
-                <h1>What would you like to eat?</h1>
-
-                <select id="food">
-
-                    <option value="">Choose one...</option>
-                    <option>🍕 Pizza</option>
-                    <option>🍔 Burger</option>
-                    <option>🍣 Sushi</option>
-                    <option>🍝 Italian</option>
-                    <option>🌮 Mexican</option>
-                    <option>🥩 Steak</option>
-                    <option>🍗 Chicken</option>
-                    <option>🍰 Dessert</option>
-                    <option>🎬 Netflix & Chill</option>
-                       <option>🔞 sex! </option>
-                </select>
-
-                <button id="foodNext">
-                    Continue →
-                </button>
-
-            </div>
-
-        </div>
-
-        `;
-
-    }
-
-    if (e.target.id === "changeDate") {
-
-        location.reload();
-
-    }
-
-});
-
-                 
-
-  
-
-document.addEventListener("click", function (e) {
-
-    if (e.target.id !== "next") return;
-
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-
-    if (!date || !time) {
-        alert("Please choose a date and time ❤️");
+        alert("Please choose your favourite food! ❤️");
         return;
-    }
 
-    const formattedDate = new Date(date).toLocaleDateString("en-GB", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-    });
+    }
 
     document.body.innerHTML = `
 
     <div class="page">
 
-        <div class="card">
+        <div class="success">
 
-            <div class="cupid">💖</div>
+            <h1>🎉 It's a Date! ❤️</h1>
 
-            <h1>Is this okay?</h1>
+            <p><strong>📅 Date:</strong> ${selectedDate}</p>
 
-            <p><strong>📅 Date:</strong> ${formattedDate}</p>
+            <p><strong>🕒 Time:</strong> ${selectedTime}</p>
 
-            <p><strong>🕒 Time:</strong> ${time}</p>
+            <p><strong>🍽️ Food:</strong> ${food}</p>
 
-            <div class="buttons">
+            <h2>Can't wait to see you! 🥰</h2>
 
-                <button id="confirmDate">
-                    Yes, Continue ❤️
-                </button>
-
-                <button id="changeDate">
-                    Change ✏️
-                </button>
-
-            </div>
+            <button class="finishBtn" onclick="location.reload()">
+                Start Again ❤️
+            </button>
 
         </div>
 
@@ -262,4 +235,86 @@ document.addEventListener("click", function (e) {
 
     `;
 
+    createHearts();
+
 });
+
+
+/* ==========================
+   HEART ANIMATION
+========================== */
+
+function createHearts(){
+
+    const interval = setInterval(()=>{
+
+        const heart = document.createElement("div");
+
+        heart.innerHTML = "❤️";
+
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "100vh";
+        heart.style.fontSize = (20 + Math.random() * 25) + "px";
+        heart.style.pointerEvents = "none";
+        heart.style.animation = "float 4s linear forwards";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },4000);
+
+    },200);
+
+    setTimeout(()=>{
+        clearInterval(interval);
+    },5000);
+
+}
+
+
+/* ==========================
+   EXTRA CSS FOR SUCCESS PAGE
+========================== */
+
+const style = document.createElement("style");
+
+style.innerHTML = `
+
+.success{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    text-align:center;
+}
+
+.success h1{
+    color:#ff2d55;
+    margin-bottom:20px;
+}
+
+.success h2{
+    margin-top:20px;
+    color:#555;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:1;
+}
+
+100%{
+transform:translateY(-120vh) rotate(720deg);
+opacity:0;
+}
+
+}
+
+`;
+
+document.head.appendChild(style);
