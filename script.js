@@ -3,7 +3,32 @@ import { db } from "./firebase.js";
 import {
     ref,
     push
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+}async function saveResponse(date, time, food) {
+
+    try {
+
+        await push(ref(db, "responses"), {
+
+            date: date,
+            time: time,
+            food: food,
+            submittedAt: new Date().toISOString()
+
+        });
+
+        return true;
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Failed to save.");
+
+        return false;
+
+    }
+
+}
+    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 const no = document.getElementById("no");
 const yes = document.getElementById("yes");
 const msg = document.getElementById("message");
